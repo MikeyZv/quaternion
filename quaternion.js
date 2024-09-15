@@ -16,38 +16,52 @@ class Quaternion {
         let newX = this.w*q.x + this.x*q.w - this.y*q.z + this.z*q.y;
         let newY = this.w*q.y + this.x*q.z + this.y*q.w - this.z*q.x;
         let newZ = this.w*q.z - this.x*q.y + this.y*q.x + this.z*q.w;
-    
-        return new Quaternion(newW, newX, newY, newZ);
+        
+        this.w = newW;
+        this.x = newX; 
+        this.y = newY;
+        this.z = newZ; 
     }
 
-    conjugate(q) {
-        return new Quaternion(q.w, -q.x, -q.y, -q.z);
+    conjugate() {
+        this.x = -this.x;
+        this.y = -this.y;
+        this.z = -this.z;
     }
 
 
     toAxisAngle() {
-        angle = 2*Math.acos(this.w);
-        let a = this.x/Math.sin(angle/2)
-        let b = this.y/Math.sin(angle/2)
-        let c  = this.z/Math.sin(angle/2)
-        return "rotate3d(" + a + "," + b + "," + c + "," + angle + "deg)";
+        let radians = 2*Math.acos(this.w);
+        this.w = radians * 180 / Math.PI;
+        this.x = this.x/Math.sin(radians/2);
+        this.y = this.y/Math.sin(radians/2);
+        this.z = this.z/Math.sin(radians/2);
     }
+
+    normalize() {
+        let magnitude = Math.sqrt(this.w*this.w + this.x*this.x + this.y*this.y + this.z*this.z);
+        this.w = this.w / magnitude;
+        this.x = this.x / magnitude;
+        this.y = this.y / magnitude;
+        this.z = this.z / magnitude;
+    }
+    
 }
 
 function toQuaterion(a, b, c, angle) {
-    halfangle = angle / 2;
-    sin = Math.sin(halfangle);
-    cos = Math.cos(halfangle);
+    let radians = angle * Math.PI / 180;
+    let halfangle = radians / 2;
+    let sin = Math.sin(halfangle);
+    let cos = Math.cos(halfangle);
     return new Quaternion(cos, sin*a, sin*b, sin*c);
 };
 
-let pureQuat = new Quaternion(0, 0, 1, 0);
 let cube = document.querySelector(".cube");
-let q1 = toQuaterion(0, 1, 0, 90);
+let pureQ = new Quaternion(0, 0, 0, 1);
+let q1 = toQuaterion(1, 0, 0, 90);
 
-let q2 = q1.multiply(pureQuat);
-let trans = q2.toAxisAngle();
+q1.multiply(pureQ);
+q1.normalize();
+q1.toAxisAngle();
 
-
-cube.style.transform = trans;
-
+cube.style.transform = "rotate3d(" + q1.x + "," + q1.y + "," + q1.z + "," + q1.w + "deg)";
