@@ -30,10 +30,11 @@ class Quaternion {
 
     toAxisAngle() {
         let radians = 2*Math.acos(this.w);
-        this.w = radians * 180 / Math.PI;
-        this.x = this.x/Math.sin(radians/2);
-        this.y = this.y/Math.sin(radians/2);
-        this.z = this.z/Math.sin(radians/2);
+        let w = radians * 180 / Math.PI;
+        let x = this.x/Math.sin(radians/2);
+        let y = this.y/Math.sin(radians/2);
+        let z = this.z/Math.sin(radians/2);
+        return new Quaternion(w, x, y, z);
     }
 
     normalize() {
@@ -54,17 +55,35 @@ function toQuaterion(a, b, c, angle) {
     return new Quaternion(cos, sin*a, sin*b, sin*c);
 };
 
-let cube = document.querySelector(".cube");
-let pureQ = new Quaternion(0, 1, 1, 1);
-let q1 = toQuaterion(0, 1, 0, 90);
-let q2 = toQuaterion(0, 0, 1, 90);
-let q3 = toQuaterion(0, 1, 0, 90);
+let initQuat = toQuaterion(0,0,0,0);
 
-q3.normalize();
-q2.normalize();
-q1.multiply(q2);
-q1.multiply(q3);
-q1.toAxisAngle();
+function rotateX() {
+    let cube = document.querySelector(".cube");
+    let q = toQuaterion(1, 0, 0, 90);
+    q.normalize();
+    initQuat.multiply(q);
+    let returnQ = initQuat.toAxisAngle();
+    cube.style.transform = "rotate3d(" + returnQ.x + "," + returnQ.y + "," + returnQ.z + "," + returnQ.w + "deg)";
+};
 
+function rotateY() {
+    let cube = document.querySelector(".cube");
+    let q = toQuaterion(0, 1, 0, 90);
+    q.normalize();
+    initQuat.multiply(q);
+    let returnQ = initQuat.toAxisAngle();
+    cube.style.transform = "rotate3d(" + returnQ.x + "," + returnQ.y + "," + returnQ.z + "," + returnQ.w + "deg)";
+};
 
-cube.style.transform = "rotate3d(" + q1.x + "," + q1.y + "," + q1.z + "," + q1.w + "deg)";
+function rotateZ() {
+    let cube = document.querySelector(".cube");
+    let q = toQuaterion(0, 0, 1, 90);
+    q.normalize();
+    initQuat.multiply(q);
+    let returnQ = initQuat.toAxisAngle();
+    cube.style.transform = "rotate3d(" + returnQ.x + "," + returnQ.y + "," + returnQ.z + "," + returnQ.w + "deg)";
+};
+
+rotateX();
+rotateY();
+rotateZ();
