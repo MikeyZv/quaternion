@@ -24,9 +24,7 @@ class Quaternion {
     }
 
     conjugate() {
-        this.x = -this.x;
-        this.y = -this.y;
-        this.z = -this.z;
+        return new Quaternion(this.w, -this.x, -this.y, -this.z);
     }
 
 
@@ -57,11 +55,16 @@ function toQuaterion(a, b, c, angle) {
 };
 
 let cube = document.querySelector(".cube");
-let pureQ = new Quaternion(0, 0, 0, 1);
-let q1 = toQuaterion(1, 0, 0, 90);
+let pureQ = new Quaternion(0, 1, 1, 1);
+let q1 = toQuaterion(0, 1, 0, 90);
+let q2 = toQuaterion(0, 0, 1, 90);
+let q3 = toQuaterion(0, 1, 0, 90);
 
-q1.multiply(pureQ);
-q1.normalize();
+q3.normalize();
+q2.normalize();
+q1.multiply(q2);
+q1.multiply(q3);
 q1.toAxisAngle();
+
 
 cube.style.transform = "rotate3d(" + q1.x + "," + q1.y + "," + q1.z + "," + q1.w + "deg)";
