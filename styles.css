@@ -3,6 +3,10 @@
     --translateZ: 150px;
 }
 
+body {
+    background-color: black;
+}
+
 #main-container {
     display: flex;
     justify-content: space-evenly;
@@ -19,7 +23,7 @@
     justify-content: center;
     height: 600px;
     width: 600px;
-    background-color: purple;
+    background-color: none;
     perspective: 900px;
     perspective-origin: center;
 }
@@ -27,13 +31,13 @@
 .right-container {
     display: flex;
     flex-direction: column;
-    background-color: red;
+    background-color: none;
     height: 600px;
     width: 600px;
 }
 
 .button-container {
-    background-color: yellow;
+    background-color: none;
 }
 
 .rotateBtn {
@@ -43,6 +47,7 @@
     background-color: black;
     color: white;
     font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
 }
 
 .rotateBtn:hover {
@@ -61,7 +66,8 @@
     height: 500px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    position: relative;
+    top: 150px;
 }
 
 .textCSS {

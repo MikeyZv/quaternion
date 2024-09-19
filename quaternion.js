@@ -46,6 +46,9 @@ class Quaternion {
 
 
     toAxisAngle() {
+        if (this.w == 1) {
+            return new Quaternion(0, 1, 0, 0);
+        }
         let radians = 2*Math.acos(this.w);
         let w = radians * 180 / Math.PI;
         let x = this.x/Math.sin(radians/2);
@@ -73,77 +76,87 @@ function toQuaterion(a, b, c, angle) {
 };
 
 let initQuat = toQuaterion(0,0,0,0);
+document.getElementById("text-container").innerHTML = `<span class='textCSS'>Current Quaternion, (${initQuat.w.toFixed(2)}, ${initQuat.x.toFixed(2)}, ${initQuat.y.toFixed(2)}, ${initQuat.z.toFixed(2)})</span>`;
 
 function rotateXPos() {
     let cube = document.querySelector(".cube");
     let q = toQuaterion(1, 0, 0, 90);
-    let q1 = `Current Quaternion, Q1: (${initQuat.w.toFixed(2)}, ${initQuat.x.toFixed(2)}, ${initQuat.y.toFixed(2)}, ${initQuat.z.toFixed(2)})<br/>`;
-    let q2 = `Rotation Quaternion, Q2: (${q.w.toFixed(2)}, ${q.x.toFixed(2)}, ${q.y.toFixed(2)}, ${q.z.toFixed(2)})<br/>`;
+    let q1 = `Current Quaternion, Q1 = (${initQuat.w.toFixed(2)}, ${initQuat.x.toFixed(2)}, ${initQuat.y.toFixed(2)}, ${initQuat.z.toFixed(2)})<br/>`;
+    let q2 = `Rotation Quaternion, Q2 = (${q.w.toFixed(2)}, ${q.x.toFixed(2)}, ${q.y.toFixed(2)}, ${q.z.toFixed(2)})<br/>`;
     initQuat.multiply(q);
-    let result = `Result Quarternion, Q1 * Q2 = (${initQuat.w.toFixed(2)}, ${initQuat.x.toFixed(2)}, ${initQuat.y.toFixed(2)}, ${initQuat.z.toFixed(2)})`;
+    let result = `Quarternion Result, Q1 * Q2 = (${initQuat.w.toFixed(2)}, ${initQuat.x.toFixed(2)}, ${initQuat.y.toFixed(2)}, ${initQuat.z.toFixed(2)})<br/>`;
     let returnQ = initQuat.toAxisAngle();
+    let axisResult = `Angle-Axis Result, Q1 * Q2 = (${returnQ.w.toFixed(2)}, ${returnQ.x.toFixed(2)}, ${returnQ.y.toFixed(2)}, ${returnQ.z.toFixed(2)})`;
     cube.style.transform = "rotate3d(" + returnQ.x + "," + returnQ.y + "," + returnQ.z + "," + returnQ.w + "deg)";
-    document.getElementById("text-container").innerHTML = `<span class='textCSS'>${q1} ${q2} ${result}</span>`;
+    document.getElementById("text-container").innerHTML = `<span class='textCSS'>${q1} ${q2} ${result} ${axisResult}</span>`;
 };
 
 function rotateYPos() {
     let cube = document.querySelector(".cube");
     let q = toQuaterion(0, 1, 0, 90);
-    let q1 = `Current Quaternion, Q1: (${initQuat.w.toFixed(2)}, ${initQuat.x.toFixed(2)}, ${initQuat.y.toFixed(2)}, ${initQuat.z.toFixed(2)})<br/>`;
-    let q2 = `Rotation Quaternion, Q2: (${q.w.toFixed(2)}, ${q.x.toFixed(2)}, ${q.y.toFixed(2)}, ${q.z.toFixed(2)})<br/>`;
+    let q1 = `Current Quaternion, Q1 = (${initQuat.w.toFixed(2)}, ${initQuat.x.toFixed(2)}, ${initQuat.y.toFixed(2)}, ${initQuat.z.toFixed(2)})<br/>`;
+    let q2 = `Rotation Quaternion, Q2 = (${q.w.toFixed(2)}, ${q.x.toFixed(2)}, ${q.y.toFixed(2)}, ${q.z.toFixed(2)})<br/>`;
     initQuat.multiply(q);
-    let result = `Result Quarternion, Q1 * Q2 = (${initQuat.w.toFixed(2)}, ${initQuat.x.toFixed(2)}, ${initQuat.y.toFixed(2)}, ${initQuat.z.toFixed(2)})`;
+    let result = `Quarternion Result, Q1 * Q2 = (${initQuat.w.toFixed(2)}, ${initQuat.x.toFixed(2)}, ${initQuat.y.toFixed(2)}, ${initQuat.z.toFixed(2)})<br/>`;
     let returnQ = initQuat.toAxisAngle();
+    let axisResult = `Angle-Axis Result, Q1 * Q2 = (${returnQ.w.toFixed(2)}, ${returnQ.x.toFixed(2)}, ${returnQ.y.toFixed(2)}, ${returnQ.z.toFixed(2)})`;
     cube.style.transform = "rotate3d(" + returnQ.x + "," + returnQ.y + "," + returnQ.z + "," + returnQ.w + "deg)";
-    document.getElementById("text-container").innerHTML = `<span class='textCSS'>${q1} ${q2} ${result}</span>`;
+    document.getElementById("text-container").innerHTML = `<span class='textCSS'>${q1} ${q2} ${result} ${axisResult}</span>`;
 };
 
 function rotateZPos() {
     let cube = document.querySelector(".cube");
     let q = toQuaterion(0, 0, 1, 90);
-    let q1 = `Current Quaternion, Q1: (${initQuat.w.toFixed(2)}, ${initQuat.x.toFixed(2)}, ${initQuat.y.toFixed(2)}, ${initQuat.z.toFixed(2)})<br/>`;
-    let q2 = `Rotation Quaternion, Q2: (${q.w.toFixed(2)}, ${q.x.toFixed(2)}, ${q.y.toFixed(2)}, ${q.z.toFixed(2)})<br/>`;
+    let q1 = `Current Quaternion, Q1 = (${initQuat.w.toFixed(2)}, ${initQuat.x.toFixed(2)}, ${initQuat.y.toFixed(2)}, ${initQuat.z.toFixed(2)})<br/>`;
+    let q2 = `Rotation Quaternion, Q2 = (${q.w.toFixed(2)}, ${q.x.toFixed(2)}, ${q.y.toFixed(2)}, ${q.z.toFixed(2)})<br/>`;
     initQuat.multiply(q);
-    let result = `Result Quarternion, Q1 * Q2 = (${initQuat.w.toFixed(2)}, ${initQuat.x.toFixed(2)}, ${initQuat.y.toFixed(2)}, ${initQuat.z.toFixed(2)})`;
+    let result = `Quarternion Result, Q1 * Q2 = (${initQuat.w.toFixed(2)}, ${initQuat.x.toFixed(2)}, ${initQuat.y.toFixed(2)}, ${initQuat.z.toFixed(2)})<br/>`;
     let returnQ = initQuat.toAxisAngle();
+    let axisResult = `Angle-Axis Result, Q1 * Q2 = (${returnQ.w.toFixed(2)}, ${returnQ.x.toFixed(2)}, ${returnQ.y.toFixed(2)}, ${returnQ.z.toFixed(2)})`;
     cube.style.transform = "rotate3d(" + returnQ.x + "," + returnQ.y + "," + returnQ.z + "," + returnQ.w + "deg)";
-    document.getElementById("text-container").innerHTML = `<span class='textCSS'>${q1} ${q2} ${result}</span>`;
+    document.getElementById("text-container").innerHTML = `<span class='textCSS'>${q1} ${q2} ${result} ${axisResult}</span>`;
 };
 
 function rotateXNeg() {
     let cube = document.querySelector(".cube");
     let q = toQuaterion(1, 0, 0, 90);
-    let q1 = `Current Quaternion, Q1: (${initQuat.w.toFixed(2)}, ${initQuat.x.toFixed(2)}, ${initQuat.y.toFixed(2)}, ${initQuat.z.toFixed(2)})<br/>`;
-    let q2 = `Rotation Quaternion, Q2: (${q.w.toFixed(2)}, ${q.x.toFixed(2)}, ${q.y.toFixed(2)}, ${q.z.toFixed(2)})<br/>`;
+    q.conjugate();
+    let q1 = `Current Quaternion, Q1 = (${initQuat.w.toFixed(2)}, ${initQuat.x.toFixed(2)}, ${initQuat.y.toFixed(2)}, ${initQuat.z.toFixed(2)})<br/>`;
+    let q2 = `Rotation Quaternion, Q2 = (${q.w.toFixed(2)}, ${q.x.toFixed(2)}, ${q.y.toFixed(2)}, ${q.z.toFixed(2)})<br/>`;
     initQuat.multiply(q);
-    let result = `Result Quarternion, Q1 * Q2 = (${initQuat.w.toFixed(2)}, ${initQuat.x.toFixed(2)}, ${initQuat.y.toFixed(2)}, ${initQuat.z.toFixed(2)})`;
+    let result = `Quarternion Result, Q1 * Q2 = (${initQuat.w.toFixed(2)}, ${initQuat.x.toFixed(2)}, ${initQuat.y.toFixed(2)}, ${initQuat.z.toFixed(2)})<br/>`;
     let returnQ = initQuat.toAxisAngle();
+    let axisResult = `Angle-Axis Result, Q1 * Q2 = (${returnQ.w.toFixed(2)}, ${returnQ.x.toFixed(2)}, ${returnQ.y.toFixed(2)}, ${returnQ.z.toFixed(2)})`;
     cube.style.transform = "rotate3d(" + returnQ.x + "," + returnQ.y + "," + returnQ.z + "," + returnQ.w + "deg)";
-    document.getElementById("text-container").innerHTML = `<span class='textCSS'>${q1} ${q2} ${result}</span>`;
+    document.getElementById("text-container").innerHTML = `<span class='textCSS'>${q1} ${q2} ${result} ${axisResult}</span>`;
 };
 
 function rotateYNeg() {
     let cube = document.querySelector(".cube");
     let q = toQuaterion(0, 1, 0, 90);
-    let q1 = `Current Quaternion, Q1: (${initQuat.w.toFixed(2)}, ${initQuat.x.toFixed(2)}, ${initQuat.y.toFixed(2)}, ${initQuat.z.toFixed(2)})<br/>`;
-    let q2 = `Rotation Quaternion, Q2: (${q.w.toFixed(2)}, ${q.x.toFixed(2)}, ${q.y.toFixed(2)}, ${q.z.toFixed(2)})<br/>`;
+    q.conjugate();
+    let q1 = `Current Quaternion, Q1 = (${initQuat.w.toFixed(2)}, ${initQuat.x.toFixed(2)}, ${initQuat.y.toFixed(2)}, ${initQuat.z.toFixed(2)})<br/>`;
+    let q2 = `Rotation Quaternion, Q2 = (${q.w.toFixed(2)}, ${q.x.toFixed(2)}, ${q.y.toFixed(2)}, ${q.z.toFixed(2)})<br/>`;
     initQuat.multiply(q);
-    let result = `Result Quarternion, Q1 * Q2 = (${initQuat.w.toFixed(2)}, ${initQuat.x.toFixed(2)}, ${initQuat.y.toFixed(2)}, ${initQuat.z.toFixed(2)})`;
+    let result = `Quarternion Result, Q1 * Q2 = (${initQuat.w.toFixed(2)}, ${initQuat.x.toFixed(2)}, ${initQuat.y.toFixed(2)}, ${initQuat.z.toFixed(2)})<br/>`;
     let returnQ = initQuat.toAxisAngle();
+    let axisResult = `Angle-Axis Result, Q1 * Q2 = (${returnQ.w.toFixed(2)}, ${returnQ.x.toFixed(2)}, ${returnQ.y.toFixed(2)}, ${returnQ.z.toFixed(2)})`;
     cube.style.transform = "rotate3d(" + returnQ.x + "," + returnQ.y + "," + returnQ.z + "," + returnQ.w + "deg)";
-    document.getElementById("text-container").innerHTML = `<span class='textCSS'>${q1} ${q2} ${result}</span>`;
+    document.getElementById("text-container").innerHTML = `<span class='textCSS'>${q1} ${q2} ${result} ${axisResult}</span>`;
 };
 
 function rotateZNeg() {
     let cube = document.querySelector(".cube");
     let q = toQuaterion(0, 0, 1, 90);
-    let q1 = `Current Quaternion, Q1: (${initQuat.w.toFixed(2)}, ${initQuat.x.toFixed(2)}, ${initQuat.y.toFixed(2)}, ${initQuat.z.toFixed(2)})<br/>`;
-    let q2 = `Rotation Quaternion, Q2: (${q.w.toFixed(2)}, ${q.x.toFixed(2)}, ${q.y.toFixed(2)}, ${q.z.toFixed(2)})<br/>`;
+    q.conjugate();
+    let q1 = `Current Quaternion, Q1 = (${initQuat.w.toFixed(2)}, ${initQuat.x.toFixed(2)}, ${initQuat.y.toFixed(2)}, ${initQuat.z.toFixed(2)})<br/>`;
+    let q2 = `Rotation Quaternion, Q2 = (${q.w.toFixed(2)}, ${q.x.toFixed(2)}, ${q.y.toFixed(2)}, ${q.z.toFixed(2)})<br/>`;
     initQuat.multiply(q);
-    let result = `Result Quarternion, Q1 * Q2 = (${initQuat.w.toFixed(2)}, ${initQuat.x.toFixed(2)}, ${initQuat.y.toFixed(2)}, ${initQuat.z.toFixed(2)})`;
+    let result = `Quarternion Result, Q1 * Q2 = (${initQuat.w.toFixed(2)}, ${initQuat.x.toFixed(2)}, ${initQuat.y.toFixed(2)}, ${initQuat.z.toFixed(2)})<br/>`;
     let returnQ = initQuat.toAxisAngle();
+    let axisResult = `Angle-Axis Result, Q1 * Q2 = (${returnQ.w.toFixed(2)}, ${returnQ.x.toFixed(2)}, ${returnQ.y.toFixed(2)}, ${returnQ.z.toFixed(2)})`;
     cube.style.transform = "rotate3d(" + returnQ.x + "," + returnQ.y + "," + returnQ.z + "," + returnQ.w + "deg)";
-    document.getElementById("text-container").innerHTML = `<span class='textCSS'>${q1} ${q2} ${result}</span>`;
+    document.getElementById("text-container").innerHTML = `<span class='textCSS'>${q1} ${q2} ${result} ${axisResult}</span>`;
 };
 
 
