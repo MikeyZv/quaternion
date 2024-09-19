@@ -1,3 +1,17 @@
+const xPos90Btn = document.querySelector("#btn-rotate-x-pos90");
+const yPos90Btn = document.querySelector("#btn-rotate-y-pos90");
+const zPos90Btn = document.querySelector("#btn-rotate-z-pos90");
+const xNeg90Btn = document.querySelector("#btn-rotate-x-neg90");
+const yNeg90Btn = document.querySelector("#btn-rotate-y-neg90");
+const zNeg90Btn = document.querySelector("#btn-rotate-z-neg90");
+
+xPos90Btn.addEventListener("click", rotateXPos);
+yPos90Btn.addEventListener("click", rotateYPos);
+zPos90Btn.addEventListener("click", rotateZPos); 
+xNeg90Btn.addEventListener("click", rotateXNeg);
+yNeg90Btn.addEventListener("click", rotateYNeg);
+zNeg90Btn.addEventListener("click", rotateZNeg);
+
 class Quaternion {
     w;
     x;
@@ -24,7 +38,10 @@ class Quaternion {
     }
 
     conjugate() {
-        return new Quaternion(this.w, -this.x, -this.y, -this.z);
+        this.w = this.w;
+        this.x = -this.x;
+        this.y = -this.y;
+        this.z = -this.z;
     }
 
 
@@ -57,33 +74,76 @@ function toQuaterion(a, b, c, angle) {
 
 let initQuat = toQuaterion(0,0,0,0);
 
-function rotateX() {
+function rotateXPos() {
     let cube = document.querySelector(".cube");
     let q = toQuaterion(1, 0, 0, 90);
-    q.normalize();
+    let q1 = `Current Quaternion, Q1: (${initQuat.w.toFixed(2)}, ${initQuat.x.toFixed(2)}, ${initQuat.y.toFixed(2)}, ${initQuat.z.toFixed(2)})<br/>`;
+    let q2 = `Rotation Quaternion, Q2: (${q.w.toFixed(2)}, ${q.x.toFixed(2)}, ${q.y.toFixed(2)}, ${q.z.toFixed(2)})<br/>`;
     initQuat.multiply(q);
+    let result = `Result Quarternion, Q1 * Q2 = (${initQuat.w.toFixed(2)}, ${initQuat.x.toFixed(2)}, ${initQuat.y.toFixed(2)}, ${initQuat.z.toFixed(2)})`;
     let returnQ = initQuat.toAxisAngle();
     cube.style.transform = "rotate3d(" + returnQ.x + "," + returnQ.y + "," + returnQ.z + "," + returnQ.w + "deg)";
+    document.getElementById("text-container").innerHTML = `<span class='textCSS'>${q1} ${q2} ${result}</span>`;
 };
 
-function rotateY() {
+function rotateYPos() {
     let cube = document.querySelector(".cube");
     let q = toQuaterion(0, 1, 0, 90);
-    q.normalize();
+    let q1 = `Current Quaternion, Q1: (${initQuat.w.toFixed(2)}, ${initQuat.x.toFixed(2)}, ${initQuat.y.toFixed(2)}, ${initQuat.z.toFixed(2)})<br/>`;
+    let q2 = `Rotation Quaternion, Q2: (${q.w.toFixed(2)}, ${q.x.toFixed(2)}, ${q.y.toFixed(2)}, ${q.z.toFixed(2)})<br/>`;
     initQuat.multiply(q);
+    let result = `Result Quarternion, Q1 * Q2 = (${initQuat.w.toFixed(2)}, ${initQuat.x.toFixed(2)}, ${initQuat.y.toFixed(2)}, ${initQuat.z.toFixed(2)})`;
     let returnQ = initQuat.toAxisAngle();
     cube.style.transform = "rotate3d(" + returnQ.x + "," + returnQ.y + "," + returnQ.z + "," + returnQ.w + "deg)";
+    document.getElementById("text-container").innerHTML = `<span class='textCSS'>${q1} ${q2} ${result}</span>`;
 };
 
-function rotateZ() {
+function rotateZPos() {
     let cube = document.querySelector(".cube");
     let q = toQuaterion(0, 0, 1, 90);
-    q.normalize();
+    let q1 = `Current Quaternion, Q1: (${initQuat.w.toFixed(2)}, ${initQuat.x.toFixed(2)}, ${initQuat.y.toFixed(2)}, ${initQuat.z.toFixed(2)})<br/>`;
+    let q2 = `Rotation Quaternion, Q2: (${q.w.toFixed(2)}, ${q.x.toFixed(2)}, ${q.y.toFixed(2)}, ${q.z.toFixed(2)})<br/>`;
     initQuat.multiply(q);
+    let result = `Result Quarternion, Q1 * Q2 = (${initQuat.w.toFixed(2)}, ${initQuat.x.toFixed(2)}, ${initQuat.y.toFixed(2)}, ${initQuat.z.toFixed(2)})`;
     let returnQ = initQuat.toAxisAngle();
     cube.style.transform = "rotate3d(" + returnQ.x + "," + returnQ.y + "," + returnQ.z + "," + returnQ.w + "deg)";
+    document.getElementById("text-container").innerHTML = `<span class='textCSS'>${q1} ${q2} ${result}</span>`;
 };
 
-rotateX();
-rotateY();
-rotateZ();
+function rotateXNeg() {
+    let cube = document.querySelector(".cube");
+    let q = toQuaterion(1, 0, 0, 90);
+    let q1 = `Current Quaternion, Q1: (${initQuat.w.toFixed(2)}, ${initQuat.x.toFixed(2)}, ${initQuat.y.toFixed(2)}, ${initQuat.z.toFixed(2)})<br/>`;
+    let q2 = `Rotation Quaternion, Q2: (${q.w.toFixed(2)}, ${q.x.toFixed(2)}, ${q.y.toFixed(2)}, ${q.z.toFixed(2)})<br/>`;
+    initQuat.multiply(q);
+    let result = `Result Quarternion, Q1 * Q2 = (${initQuat.w.toFixed(2)}, ${initQuat.x.toFixed(2)}, ${initQuat.y.toFixed(2)}, ${initQuat.z.toFixed(2)})`;
+    let returnQ = initQuat.toAxisAngle();
+    cube.style.transform = "rotate3d(" + returnQ.x + "," + returnQ.y + "," + returnQ.z + "," + returnQ.w + "deg)";
+    document.getElementById("text-container").innerHTML = `<span class='textCSS'>${q1} ${q2} ${result}</span>`;
+};
+
+function rotateYNeg() {
+    let cube = document.querySelector(".cube");
+    let q = toQuaterion(0, 1, 0, 90);
+    let q1 = `Current Quaternion, Q1: (${initQuat.w.toFixed(2)}, ${initQuat.x.toFixed(2)}, ${initQuat.y.toFixed(2)}, ${initQuat.z.toFixed(2)})<br/>`;
+    let q2 = `Rotation Quaternion, Q2: (${q.w.toFixed(2)}, ${q.x.toFixed(2)}, ${q.y.toFixed(2)}, ${q.z.toFixed(2)})<br/>`;
+    initQuat.multiply(q);
+    let result = `Result Quarternion, Q1 * Q2 = (${initQuat.w.toFixed(2)}, ${initQuat.x.toFixed(2)}, ${initQuat.y.toFixed(2)}, ${initQuat.z.toFixed(2)})`;
+    let returnQ = initQuat.toAxisAngle();
+    cube.style.transform = "rotate3d(" + returnQ.x + "," + returnQ.y + "," + returnQ.z + "," + returnQ.w + "deg)";
+    document.getElementById("text-container").innerHTML = `<span class='textCSS'>${q1} ${q2} ${result}</span>`;
+};
+
+function rotateZNeg() {
+    let cube = document.querySelector(".cube");
+    let q = toQuaterion(0, 0, 1, 90);
+    let q1 = `Current Quaternion, Q1: (${initQuat.w.toFixed(2)}, ${initQuat.x.toFixed(2)}, ${initQuat.y.toFixed(2)}, ${initQuat.z.toFixed(2)})<br/>`;
+    let q2 = `Rotation Quaternion, Q2: (${q.w.toFixed(2)}, ${q.x.toFixed(2)}, ${q.y.toFixed(2)}, ${q.z.toFixed(2)})<br/>`;
+    initQuat.multiply(q);
+    let result = `Result Quarternion, Q1 * Q2 = (${initQuat.w.toFixed(2)}, ${initQuat.x.toFixed(2)}, ${initQuat.y.toFixed(2)}, ${initQuat.z.toFixed(2)})`;
+    let returnQ = initQuat.toAxisAngle();
+    cube.style.transform = "rotate3d(" + returnQ.x + "," + returnQ.y + "," + returnQ.z + "," + returnQ.w + "deg)";
+    document.getElementById("text-container").innerHTML = `<span class='textCSS'>${q1} ${q2} ${result}</span>`;
+};
+
+

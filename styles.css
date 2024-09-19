@@ -5,14 +5,69 @@
 
 #main-container {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     background-color: none;
     height: 1000px;
-    perspective: 900px;
-    perspective-origin: center;
     margin: 0px;
     padding: 0px;
+}
+
+.cube-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 600px;
+    width: 600px;
+    background-color: purple;
+    perspective: 900px;
+    perspective-origin: center;
+}
+
+.right-container {
+    display: flex;
+    flex-direction: column;
+    background-color: red;
+    height: 600px;
+    width: 600px;
+}
+
+.button-container {
+    background-color: yellow;
+}
+
+.rotateBtn {
+    width: 100%;
+    height: 50px;
+    border: none;
+    background-color: black;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.rotateBtn:hover {
+    cursor: pointer;
+    background-color: white;
+    color: black;
+}
+
+.layer {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.output-container {
+    background-color: black;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.textCSS {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: white;
 }
 
 .cube {
