@@ -4,7 +4,7 @@
 }
 
 body {
-    background-color: black;
+    background-color: #0f0f0f;
 }
 
 #main-container {
@@ -12,7 +12,7 @@ body {
     justify-content: space-evenly;
     align-items: center;
     background-color: none;
-    height: 1000px;
+    height: 800px;
     margin: 0px;
     padding: 0px;
 }
@@ -49,7 +49,7 @@ body {
     width: 100%;
     height: 50px;
     border: none;
-    background-color: black;
+    background-color: #0f0f0f;
     color: white;
     font-family: 'Courier New', Courier, monospace;
     font-size: 15px;
@@ -57,13 +57,14 @@ body {
 
 .rotateBtn:hover {
     cursor: pointer;
-    background-color: white;
-    color: black;
+    /* background-color: white;
+    color: black; */
 }
 
 .output-container {
     background-color: none;
     height: 400px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -129,3 +130,37 @@ body {
     background-color: yellow;
     transform: rotate3d(1,0,0,-90deg) translate3d(0,0,var(--translateZ));
 } 
+
+@media (max-width: 600px) {
+    :root {
+        --cube-width: 150px;
+        --translateZ: 75px;
+    }
+
+    #main-container {
+        flex-direction: column;
+    }
+
+    .cube-container {
+        height: 300px;
+        width: 100%;
+    }
+
+    .right-container {
+        height: 600px;
+        width: 100%;
+    }
+
+    .output-container {
+        height: 300px;
+    }
+
+
+    .rotateBtn {
+        font-size: 13px;
+    }
+
+    .textCSS {
+        font-size: 10px;
+    }
+}

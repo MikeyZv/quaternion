@@ -116,7 +116,7 @@ function slerp(a, b, t) {
 };
 
 let initQuat = toQuaterion(0,0,0,0);
-document.getElementById("text-container").innerHTML = `<span class='textCSS'>Initial Quaternion, (${initQuat.w.toFixed(2)}, ${initQuat.x.toFixed(2)}, ${initQuat.y.toFixed(2)}, ${initQuat.z.toFixed(2)})</span>`;
+document.getElementById("text-container").innerHTML = `<span class='textCSS'>initial quaternion, (${initQuat.w.toFixed(2)}, ${initQuat.x.toFixed(2)}, ${initQuat.y.toFixed(2)}, ${initQuat.z.toFixed(2)})</span>`;
 
 function rotateXPos() {
     xPos90Btn.removeEventListener("click", rotateXPos);
@@ -165,10 +165,10 @@ function rotateXPos() {
         let cube = document.querySelector(".cube");
         let percent = t/100;
         let slerpQ = slerp(q1, q3, percent);
-        let slerpText1 = `slerp(q1, q3) quaternion = (${slerpQ.w.toFixed(2)}, ${slerpQ.x.toFixed(2)}, ${slerpQ.y.toFixed(2)}, ${slerpQ.z.toFixed(2)})<br/>`;
+        let slerpText1 = `slerp(q1, q3), quaternion = (${slerpQ.w.toFixed(2)}, ${slerpQ.x.toFixed(2)}, ${slerpQ.y.toFixed(2)}, ${slerpQ.z.toFixed(2)})<br/>`;
         slerpQ.toAxisAngle();
         cube.style.transform = `rotate3d(${slerpQ.x},${slerpQ.y},${slerpQ.z},${slerpQ.w}deg)`;
-        let slerpText2 = `slerp(q1, q3) angle-axis = (${slerpQ.w.toFixed(2)}, ${slerpQ.x.toFixed(2)}, ${slerpQ.y.toFixed(2)}, ${slerpQ.z.toFixed(2)})<br/>`;
+        let slerpText2 = `slerp(q1, q3), angle-axis = (${slerpQ.w.toFixed(2)}, ${slerpQ.x.toFixed(2)}, ${slerpQ.y.toFixed(2)}, ${slerpQ.z.toFixed(2)})<br/>`;
         document.getElementById("slerp-container").innerHTML = `<span class='textCSS'>${slerpText1} ${slerpText2}</span>`;
         t++;
         if (t == 101) {
@@ -237,10 +237,10 @@ function rotateYPos() {
         let cube = document.querySelector(".cube");
         let percent = t/100;
         let slerpQ = slerp(q1, q3, percent);
-        let slerpText1 = `slerp(q1, q3) quaternion = (${slerpQ.w.toFixed(2)}, ${slerpQ.x.toFixed(2)}, ${slerpQ.y.toFixed(2)}, ${slerpQ.z.toFixed(2)})<br/>`;
+        let slerpText1 = `slerp(q1, q3), quaternion = (${slerpQ.w.toFixed(2)}, ${slerpQ.x.toFixed(2)}, ${slerpQ.y.toFixed(2)}, ${slerpQ.z.toFixed(2)})<br/>`;
         slerpQ.toAxisAngle();
         cube.style.transform = `rotate3d(${slerpQ.x},${slerpQ.y},${slerpQ.z},${slerpQ.w}deg)`;
-        let slerpText2 = `slerp(q1, q3) angle-axis = (${slerpQ.w.toFixed(2)}, ${slerpQ.x.toFixed(2)}, ${slerpQ.y.toFixed(2)}, ${slerpQ.z.toFixed(2)})<br/>`;
+        let slerpText2 = `slerp(q1, q3), angle-axis = (${slerpQ.w.toFixed(2)}, ${slerpQ.x.toFixed(2)}, ${slerpQ.y.toFixed(2)}, ${slerpQ.z.toFixed(2)})<br/>`;
         document.getElementById("slerp-container").innerHTML = `<span class='textCSS'>${slerpText1} ${slerpText2}</span>`;
         t++;
         if (t == 101) {
@@ -309,10 +309,10 @@ function rotateZPos() {
         let cube = document.querySelector(".cube");
         let percent = t/100;
         let slerpQ = slerp(q1, q3, percent);
-        let slerpText1 = `slerp(q1, q3) quaternion = (${slerpQ.w.toFixed(2)}, ${slerpQ.x.toFixed(2)}, ${slerpQ.y.toFixed(2)}, ${slerpQ.z.toFixed(2)})<br/>`;
+        let slerpText1 = `slerp(q1, q3), quaternion = (${slerpQ.w.toFixed(2)}, ${slerpQ.x.toFixed(2)}, ${slerpQ.y.toFixed(2)}, ${slerpQ.z.toFixed(2)})<br/>`;
         slerpQ.toAxisAngle();
         cube.style.transform = `rotate3d(${slerpQ.x},${slerpQ.y},${slerpQ.z},${slerpQ.w}deg)`;
-        let slerpText2 = `slerp(q1, q3) angle-axis = (${slerpQ.w.toFixed(2)}, ${slerpQ.x.toFixed(2)}, ${slerpQ.y.toFixed(2)}, ${slerpQ.z.toFixed(2)})<br/>`;
+        let slerpText2 = `slerp(q1, q3), angle-axis = (${slerpQ.w.toFixed(2)}, ${slerpQ.x.toFixed(2)}, ${slerpQ.y.toFixed(2)}, ${slerpQ.z.toFixed(2)})<br/>`;
         document.getElementById("slerp-container").innerHTML = `<span class='textCSS'>${slerpText1} ${slerpText2}</span>`;
         t++;
         if (t == 101) {
@@ -382,10 +382,10 @@ function rotateXNeg() {
         let cube = document.querySelector(".cube");
         let percent = t/100;
         let slerpQ = slerp(q1, q3, percent);
-        let slerpText1 = `slerp(q1, q3) quaternion = (${slerpQ.w.toFixed(2)}, ${slerpQ.x.toFixed(2)}, ${slerpQ.y.toFixed(2)}, ${slerpQ.z.toFixed(2)})<br/>`;
+        let slerpText1 = `slerp(q1, q3), quaternion = (${slerpQ.w.toFixed(2)}, ${slerpQ.x.toFixed(2)}, ${slerpQ.y.toFixed(2)}, ${slerpQ.z.toFixed(2)})<br/>`;
         slerpQ.toAxisAngle();
         cube.style.transform = `rotate3d(${slerpQ.x},${slerpQ.y},${slerpQ.z},${slerpQ.w}deg)`;
-        let slerpText2 = `slerp(q1, q3) angle-axis = (${slerpQ.w.toFixed(2)}, ${slerpQ.x.toFixed(2)}, ${slerpQ.y.toFixed(2)}, ${slerpQ.z.toFixed(2)})<br/>`;
+        let slerpText2 = `slerp(q1, q3), angle-axis = (${slerpQ.w.toFixed(2)}, ${slerpQ.x.toFixed(2)}, ${slerpQ.y.toFixed(2)}, ${slerpQ.z.toFixed(2)})<br/>`;
         document.getElementById("slerp-container").innerHTML = `<span class='textCSS'>${slerpText1} ${slerpText2}</span>`;
         t++;
         if (t == 101) {
@@ -455,10 +455,10 @@ function rotateYNeg() {
         let cube = document.querySelector(".cube");
         let percent = t/100;
         let slerpQ = slerp(q1, q3, percent);
-        let slerpText1 = `slerp(q1, q3) quaternion = (${slerpQ.w.toFixed(2)}, ${slerpQ.x.toFixed(2)}, ${slerpQ.y.toFixed(2)}, ${slerpQ.z.toFixed(2)})<br/>`;
+        let slerpText1 = `slerp(q1, q3), quaternion = (${slerpQ.w.toFixed(2)}, ${slerpQ.x.toFixed(2)}, ${slerpQ.y.toFixed(2)}, ${slerpQ.z.toFixed(2)})<br/>`;
         slerpQ.toAxisAngle();
         cube.style.transform = `rotate3d(${slerpQ.x},${slerpQ.y},${slerpQ.z},${slerpQ.w}deg)`;
-        let slerpText2 = `slerp(q1, q3) angle-axis = (${slerpQ.w.toFixed(2)}, ${slerpQ.x.toFixed(2)}, ${slerpQ.y.toFixed(2)}, ${slerpQ.z.toFixed(2)})<br/>`;
+        let slerpText2 = `slerp(q1, q3), angle-axis = (${slerpQ.w.toFixed(2)}, ${slerpQ.x.toFixed(2)}, ${slerpQ.y.toFixed(2)}, ${slerpQ.z.toFixed(2)})<br/>`;
         document.getElementById("slerp-container").innerHTML = `<span class='textCSS'>${slerpText1} ${slerpText2}</span>`;
         t++;
         if (t == 101) {
@@ -528,10 +528,10 @@ function rotateZNeg() {
         let cube = document.querySelector(".cube");
         let percent = t/100;
         let slerpQ = slerp(q1, q3, percent);
-        let slerpText1 = `slerp(q1, q3) quaternion = (${slerpQ.w.toFixed(2)}, ${slerpQ.x.toFixed(2)}, ${slerpQ.y.toFixed(2)}, ${slerpQ.z.toFixed(2)})<br/>`;
+        let slerpText1 = `slerp(q1, q3), quaternion = (${slerpQ.w.toFixed(2)}, ${slerpQ.x.toFixed(2)}, ${slerpQ.y.toFixed(2)}, ${slerpQ.z.toFixed(2)})<br/>`;
         slerpQ.toAxisAngle();
         cube.style.transform = `rotate3d(${slerpQ.x},${slerpQ.y},${slerpQ.z},${slerpQ.w}deg)`;
-        let slerpText2 = `slerp(q1, q3) angle-axis = (${slerpQ.w.toFixed(2)}, ${slerpQ.x.toFixed(2)}, ${slerpQ.y.toFixed(2)}, ${slerpQ.z.toFixed(2)})<br/>`;
+        let slerpText2 = `slerp(q1, q3), angle-axis = (${slerpQ.w.toFixed(2)}, ${slerpQ.x.toFixed(2)}, ${slerpQ.y.toFixed(2)}, ${slerpQ.z.toFixed(2)})<br/>`;
         document.getElementById("slerp-container").innerHTML = `<span class='textCSS'>${slerpText1} ${slerpText2}</span>`;
         t++;
         if (t == 101) {
