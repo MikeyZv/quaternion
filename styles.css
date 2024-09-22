@@ -40,6 +40,11 @@ body {
     background-color: none;
 }
 
+.btn-row {
+    display: flex;
+    justify-content: space-evenly;
+}
+
 .rotateBtn {
     width: 100%;
     height: 50px;
@@ -56,18 +61,21 @@ body {
     color: black;
 }
 
-.layer {
+.output-container {
+    background-color: none;
+    height: 400px;
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.output-container {
-    background-color: black;
-    height: 500px;
-    display: flex;
-    justify-content: center;
-    position: relative;
-    top: 150px;
+#text-container {
+    background-color: none;
+}
+
+#slerp-container {
+    background-color: none;
 }
 
 .textCSS {
