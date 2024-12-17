@@ -61,19 +61,20 @@ class Quaternion {
             this.z = 0;
         } else {
             let radians = 2*Math.acos(this.w);
-            let w = radians * 180 / Math.PI;
-            let x = this.x/Math.sin(radians/2);
-            let y = this.y/Math.sin(radians/2);
-            let z = this.z/Math.sin(radians/2);
+            let degree = radians * 180 / Math.PI;
+            let newW = degree;
+            let newX = this.x/Math.sin(radians/2);
+            let newY = this.y/Math.sin(radians/2);
+            let newZ = this.z/Math.sin(radians/2);
 
-            this.w = w;
-            this.x = x;
-            this.y = y;
-            this.z = z;
+            this.w = newW;
+            this.x = newX;
+            this.y = newY;
+            this.z = newZ; 
         }
     }
 
-    toQuaterion() {
+    toQuaternion() {
         let radians = this.w * Math.PI / 180;
         let halfangle = radians / 2;
         let sin = Math.sin(halfangle);
@@ -87,20 +88,12 @@ class Quaternion {
 
     normalize() {
         let magnitude = Math.sqrt(this.w*this.w + this.x*this.x + this.y*this.y + this.z*this.z);
-        this.w = this.w / magnitude;
-        this.x = this.x / magnitude;
-        this.y = this.y / magnitude;
-        this.z = this.z / magnitude;
+        this.w /= magnitude;
+        this.x /= magnitude;
+        this.y /= magnitude;
+        this.z /= magnitude;
     }
     
-};
-
-function toQuaterion(a, b, c, angle) {
-    let radians = angle * Math.PI / 180;
-    let halfangle = radians / 2;
-    let sin = Math.sin(halfangle);
-    let cos = Math.cos(halfangle);
-    return new Quaternion(cos, sin*a, sin*b, sin*c);
 };
 
 function slerp(a, b, t) {
@@ -115,7 +108,9 @@ function slerp(a, b, t) {
     return result;
 };
 
-let initQuat = toQuaterion(0,0,0,0);
+let initQuat = new Quaternion(0,0,0,0);
+initQuat.toQuaternion();
+
 document.getElementById("text-container").innerHTML = `<span class='textCSS'>initial quaternion, (${initQuat.w.toFixed(2)}, ${initQuat.x.toFixed(2)}, ${initQuat.y.toFixed(2)}, ${initQuat.z.toFixed(2)})</span>`;
 
 function rotateXPos() {
@@ -134,17 +129,18 @@ function rotateXPos() {
     let text2 = `q1, quaternion = (${q1.w.toFixed(2)}, ${q1.x.toFixed(2)}, ${q1.y.toFixed(2)}, ${q1.z.toFixed(2)})<br/>`;
     q1.toAxisAngle();
     let text3 = `q1, angle-axis = (${q1.w.toFixed(2)}, ${q1.x.toFixed(2)}, ${q1.y.toFixed(2)}, ${q1.z.toFixed(2)})<br/><br/>`;
-    q1.toQuaterion();
+    q1.toQuaternion();
 
     //transformation quaternion
-    let q2 = toQuaterion(1, 0, 0, 90);
+    let q2 = new Quaternion(90, 1, 0, 0);
+    q2.toQuaternion();
 
     //q2 text
     let text4 = "transformation quaternion<br/>";
     let text5 = `q2, quaternion = (${q2.w.toFixed(2)}, ${q2.x.toFixed(2)}, ${q2.y.toFixed(2)}, ${q2.z.toFixed(2)})<br/>`;
     q2.toAxisAngle();
     let text6 = `q2, angle-axis = (${q2.w.toFixed(2)}, ${q2.x.toFixed(2)}, ${q2.y.toFixed(2)}, ${q2.z.toFixed(2)})<br/><br/>`;
-    q2.toQuaterion();
+    q2.toQuaternion();
 
     //q1 * q2
     initQuat.multiply(q2);
@@ -157,7 +153,7 @@ function rotateXPos() {
     let text8 = `q3, quaternion = (${q3.w.toFixed(2)}, ${q3.x.toFixed(2)}, ${q3.y.toFixed(2)}, ${q3.z.toFixed(2)})<br/>`;
     q3.toAxisAngle();
     let text9 = `q3, angle-axis = (${q3.w.toFixed(2)}, ${q3.x.toFixed(2)}, ${q3.y.toFixed(2)}, ${q3.z.toFixed(2)})<br/><br/>`;
-    q3.toQuaterion();
+    q3.toQuaternion();
 
     //slerp
     t = 0;
@@ -206,17 +202,18 @@ function rotateYPos() {
     let text2 = `q1, quaternion = (${q1.w.toFixed(2)}, ${q1.x.toFixed(2)}, ${q1.y.toFixed(2)}, ${q1.z.toFixed(2)})<br/>`;
     q1.toAxisAngle();
     let text3 = `q1, angle-axis = (${q1.w.toFixed(2)}, ${q1.x.toFixed(2)}, ${q1.y.toFixed(2)}, ${q1.z.toFixed(2)})<br/><br/>`;
-    q1.toQuaterion();
+    q1.toQuaternion();
 
     //transformation quaternion
-    let q2 = toQuaterion(0, 1, 0, 90);
+    let q2 = new Quaternion(90, 0, 1, 0);
+    q2.toQuaternion();
 
     //q2 text
     let text4 = "transformation quaternion<br/>";
     let text5 = `q2, quaternion = (${q2.w.toFixed(2)}, ${q2.x.toFixed(2)}, ${q2.y.toFixed(2)}, ${q2.z.toFixed(2)})<br/>`;
     q2.toAxisAngle();
     let text6 = `q2, angle-axis = (${q2.w.toFixed(2)}, ${q2.x.toFixed(2)}, ${q2.y.toFixed(2)}, ${q2.z.toFixed(2)})<br/><br/>`;
-    q2.toQuaterion();
+    q2.toQuaternion();
 
     //q1 * q2
     initQuat.multiply(q2);
@@ -229,7 +226,7 @@ function rotateYPos() {
     let text8 = `q3, quaternion = (${q3.w.toFixed(2)}, ${q3.x.toFixed(2)}, ${q3.y.toFixed(2)}, ${q3.z.toFixed(2)})<br/>`;
     q3.toAxisAngle();
     let text9 = `q3, angle-axis = (${q3.w.toFixed(2)}, ${q3.x.toFixed(2)}, ${q3.y.toFixed(2)}, ${q3.z.toFixed(2)})<br/><br/>`;
-    q3.toQuaterion();
+    q3.toQuaternion();
 
     //slerp
     t = 0;
@@ -278,17 +275,18 @@ function rotateZPos() {
     let text2 = `q1, quaternion = (${q1.w.toFixed(2)}, ${q1.x.toFixed(2)}, ${q1.y.toFixed(2)}, ${q1.z.toFixed(2)})<br/>`;
     q1.toAxisAngle();
     let text3 = `q1, angle-axis = (${q1.w.toFixed(2)}, ${q1.x.toFixed(2)}, ${q1.y.toFixed(2)}, ${q1.z.toFixed(2)})<br/><br/>`;
-    q1.toQuaterion();
+    q1.toQuaternion();
 
     //transformation quaternion
-    let q2 = toQuaterion(0, 0, 1, 90);
+    let q2 = new Quaternion(90, 0, 0, 1);
+    q2.toQuaternion();
 
     //q2 text
     let text4 = "transformation quaternion<br/>";
     let text5 = `q2, quaternion = (${q2.w.toFixed(2)}, ${q2.x.toFixed(2)}, ${q2.y.toFixed(2)}, ${q2.z.toFixed(2)})<br/>`;
     q2.toAxisAngle();
     let text6 = `q2, angle-axis = (${q2.w.toFixed(2)}, ${q2.x.toFixed(2)}, ${q2.y.toFixed(2)}, ${q2.z.toFixed(2)})<br/><br/>`;
-    q2.toQuaterion();
+    q2.toQuaternion();
 
     //q1 * q2
     initQuat.multiply(q2);
@@ -301,7 +299,7 @@ function rotateZPos() {
     let text8 = `q3, quaternion = (${q3.w.toFixed(2)}, ${q3.x.toFixed(2)}, ${q3.y.toFixed(2)}, ${q3.z.toFixed(2)})<br/>`;
     q3.toAxisAngle();
     let text9 = `q3, angle-axis = (${q3.w.toFixed(2)}, ${q3.x.toFixed(2)}, ${q3.y.toFixed(2)}, ${q3.z.toFixed(2)})<br/><br/>`;
-    q3.toQuaterion();
+    q3.toQuaternion();
 
     //slerp
     t = 0;
@@ -350,10 +348,11 @@ function rotateXNeg() {
     let text2 = `q1, quaternion = (${q1.w.toFixed(2)}, ${q1.x.toFixed(2)}, ${q1.y.toFixed(2)}, ${q1.z.toFixed(2)})<br/>`;
     q1.toAxisAngle();
     let text3 = `q1, angle-axis = (${q1.w.toFixed(2)}, ${q1.x.toFixed(2)}, ${q1.y.toFixed(2)}, ${q1.z.toFixed(2)})<br/><br/>`;
-    q1.toQuaterion();
+    q1.toQuaternion();
 
     //transformation quaternion
-    let q2 = toQuaterion(1, 0, 0, 90);
+    let q2 = new Quaternion(90, 1, 0, 0);
+    q2.toQuaternion();
     q2.conjugate();
 
     //q2 text
@@ -361,7 +360,7 @@ function rotateXNeg() {
     let text5 = `q2, quaternion = (${q2.w.toFixed(2)}, ${q2.x.toFixed(2)}, ${q2.y.toFixed(2)}, ${q2.z.toFixed(2)})<br/>`;
     q2.toAxisAngle();
     let text6 = `q2, angle-axis = (${q2.w.toFixed(2)}, ${q2.x.toFixed(2)}, ${q2.y.toFixed(2)}, ${q2.z.toFixed(2)})<br/><br/>`;
-    q2.toQuaterion();
+    q2.toQuaternion();
 
     //q1 * q2
     initQuat.multiply(q2);
@@ -374,7 +373,7 @@ function rotateXNeg() {
     let text8 = `q3, quaternion = (${q3.w.toFixed(2)}, ${q3.x.toFixed(2)}, ${q3.y.toFixed(2)}, ${q3.z.toFixed(2)})<br/>`;
     q3.toAxisAngle();
     let text9 = `q3, angle-axis = (${q3.w.toFixed(2)}, ${q3.x.toFixed(2)}, ${q3.y.toFixed(2)}, ${q3.z.toFixed(2)})<br/><br/>`;
-    q3.toQuaterion();
+    q3.toQuaternion();
 
     //slerp
     t = 0;
@@ -423,10 +422,11 @@ function rotateYNeg() {
     let text2 = `q1, quaternion = (${q1.w.toFixed(2)}, ${q1.x.toFixed(2)}, ${q1.y.toFixed(2)}, ${q1.z.toFixed(2)})<br/>`;
     q1.toAxisAngle();
     let text3 = `q1, angle-axis = (${q1.w.toFixed(2)}, ${q1.x.toFixed(2)}, ${q1.y.toFixed(2)}, ${q1.z.toFixed(2)})<br/><br/>`;
-    q1.toQuaterion();
+    q1.toQuaternion();
 
     //transformation quaternion
-    let q2 = toQuaterion(0, 1, 0, 90);
+    let q2 = new Quaternion(90, 0, 1, 0);
+    q2.toQuaternion();
     q2.conjugate();
 
     //q2 text
@@ -434,7 +434,7 @@ function rotateYNeg() {
     let text5 = `q2, quaternion = (${q2.w.toFixed(2)}, ${q2.x.toFixed(2)}, ${q2.y.toFixed(2)}, ${q2.z.toFixed(2)})<br/>`;
     q2.toAxisAngle();
     let text6 = `q2, angle-axis = (${q2.w.toFixed(2)}, ${q2.x.toFixed(2)}, ${q2.y.toFixed(2)}, ${q2.z.toFixed(2)})<br/><br/>`;
-    q2.toQuaterion();
+    q2.toQuaternion();
 
     //q1 * q2
     initQuat.multiply(q2);
@@ -447,7 +447,7 @@ function rotateYNeg() {
     let text8 = `q3, quaternion = (${q3.w.toFixed(2)}, ${q3.x.toFixed(2)}, ${q3.y.toFixed(2)}, ${q3.z.toFixed(2)})<br/>`;
     q3.toAxisAngle();
     let text9 = `q3, angle-axis = (${q3.w.toFixed(2)}, ${q3.x.toFixed(2)}, ${q3.y.toFixed(2)}, ${q3.z.toFixed(2)})<br/><br/>`;
-    q3.toQuaterion();
+    q3.toQuaternion();
 
     //slerp
     t = 0;
@@ -496,10 +496,11 @@ function rotateZNeg() {
     let text2 = `q1, quaternion = (${q1.w.toFixed(2)}, ${q1.x.toFixed(2)}, ${q1.y.toFixed(2)}, ${q1.z.toFixed(2)})<br/>`;
     q1.toAxisAngle();
     let text3 = `q1, angle-axis = (${q1.w.toFixed(2)}, ${q1.x.toFixed(2)}, ${q1.y.toFixed(2)}, ${q1.z.toFixed(2)})<br/><br/>`;
-    q1.toQuaterion();
+    q1.toQuaternion();
 
     //transformation quaternion
-    let q2 = toQuaterion(0, 0, 1, 90);
+    let q2 = new Quaternion(90, 0, 0, 1);
+    q2.toQuaternion();
     q2.conjugate();
 
     //q2 text
@@ -507,7 +508,7 @@ function rotateZNeg() {
     let text5 = `q2, quaternion = (${q2.w.toFixed(2)}, ${q2.x.toFixed(2)}, ${q2.y.toFixed(2)}, ${q2.z.toFixed(2)})<br/>`;
     q2.toAxisAngle();
     let text6 = `q2, angle-axis = (${q2.w.toFixed(2)}, ${q2.x.toFixed(2)}, ${q2.y.toFixed(2)}, ${q2.z.toFixed(2)})<br/><br/>`;
-    q2.toQuaterion();
+    q2.toQuaternion();
 
     //q1 * q2
     initQuat.multiply(q2);
@@ -520,7 +521,7 @@ function rotateZNeg() {
     let text8 = `q3, quaternion = (${q3.w.toFixed(2)}, ${q3.x.toFixed(2)}, ${q3.y.toFixed(2)}, ${q3.z.toFixed(2)})<br/>`;
     q3.toAxisAngle();
     let text9 = `q3, angle-axis = (${q3.w.toFixed(2)}, ${q3.x.toFixed(2)}, ${q3.y.toFixed(2)}, ${q3.z.toFixed(2)})<br/><br/>`;
-    q3.toQuaterion();
+    q3.toQuaternion();
 
     //slerp
     t = 0;
@@ -552,5 +553,3 @@ function rotateZNeg() {
         zNeg90Btn.addEventListener("click", rotateZNeg);
     }, 405);
 };
-
-

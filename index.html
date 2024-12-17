@@ -9,16 +9,28 @@
     </head>
     <body>
         <h1>quaternions</h1>
-        <h3>the true defender against gimbal lock</h3>
+        <h3>gimbal lock's worst nightmare</h3>
         <div id="main-container">
             <div class="cube-container">
                 <div class="cube">
-                    <div class="cube-face front"></div>
-                    <div class="cube-face back"></div>
-                    <div class="cube-face left"></div>
-                    <div class="cube-face right"></div>
-                    <div class="cube-face top"></div>
-                    <div class="cube-face bottom"></div>
+                    <div class="cube-face front">
+                        <canvas id="animation-box-front"></canvas>
+                    </div>
+                    <div class="cube-face back">
+                        <canvas id="animation-box-back"></canvas>
+                    </div>
+                    <div class="cube-face left">
+                        <canvas id="animation-box-left"></canvas>
+                    </div>
+                    <div class="cube-face right">
+                        <canvas id="animation-box-right"></canvas>
+                    </div>
+                    <div class="cube-face top">
+                        <canvas id="animation-box-top"></canvas>
+                    </div>
+                    <div class="cube-face bottom">
+                        <canvas id="animation-box-bottom"></canvas>
+                    </div>
                 </div>
             </div>
             <div class="right-container">
@@ -41,6 +53,7 @@
             </div>
         </div>
         <script src="quaternion.js"></script>
+        <script src="matrix.js"></script>
     </body>
     <footer>
         <a href="https://www.linkedin.com/in/miguelzv/">
@@ -52,6 +65,5 @@
         <a href="https://github.com/MikeyZv">
             <i class="fa-brands fa-github fa-2xl"></i>
         </a>
-        <p id="signature">created by Miguel Zavala</p>
     </footer>
 </html>
