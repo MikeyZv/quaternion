@@ -18,7 +18,7 @@ export function handleTouchMove(event) {
 };
 
 export function handleTouchEnd() {
-    const threshold = 100;
+    const threshold = 75;
     const deltaX = touchendX - touchstartX;
     const deltaY = touchendY - touchstartY;
     if ((Math.abs(deltaX) > Math.abs(deltaY)) && (Math.abs(deltaX) > threshold)) {
