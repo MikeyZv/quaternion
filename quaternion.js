@@ -12,6 +12,7 @@ xNeg90Btn.addEventListener("click", rotateXNeg);
 yNeg90Btn.addEventListener("click", rotateYNeg);
 zNeg90Btn.addEventListener("click", rotateZNeg);
 
+
 class Quaternion {
     w;
     x;
@@ -185,6 +186,7 @@ function rotateXPos() {
         zNeg90Btn.addEventListener("click", rotateZNeg);
     }, 405);
 };
+
 
 function rotateYPos() {
     xPos90Btn.removeEventListener("click", rotateXPos);
@@ -553,3 +555,46 @@ function rotateZNeg() {
         zNeg90Btn.addEventListener("click", rotateZNeg);
     }, 405);
 };
+
+const touchpad = document.querySelector(".cube-container");
+
+let touchstartX;
+let touchstartY;
+let touchendX;
+let touchendY;
+
+touchpad.addEventListener("touchstart", (event) => {
+    touchstartX = event.touches[0].clientX;
+    touchstartY = event.touches[0].clientY;
+});
+
+touchpad.addEventListener("touchmove", (event) => {
+    touchendX = event.touches[0].clientX;
+    touchendY = event.touches[0].clientY;
+    event.preventDefault();
+});
+
+touchpad.addEventListener("touchend", () => {
+    const threshold = 100;
+    const deltaX = touchendX - touchstartX;
+    const deltaY = touchendY - touchstartY;
+    if ((Math.abs(deltaX) > Math.abs(deltaY)) && (Math.abs(deltaX) > threshold)) {
+        // Horizontal swipe
+        if (deltaX > 0) {
+          // Swipe right
+          rotateYPos();
+        } else {
+          // Swipe left
+          rotateYNeg();
+        }
+    } else if ((Math.abs(deltaY) > Math.abs(deltaX)) && (Math.abs(deltaY) > threshold)) {
+        // Vertical swipe
+        if (deltaY > 0) {
+          // Swipe down
+          rotateXNeg();
+        } else {
+          // Swipe up
+          rotateXPos();
+        }
+    }
+});
